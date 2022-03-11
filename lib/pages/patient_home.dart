@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sampleproject/pages/timeline.dart';
+import 'timeline.dart';
+import 'meal.dart';
 
 class PatientHome extends StatefulWidget {
   @override
@@ -10,16 +11,8 @@ class _PatientHomeState extends State<PatientHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomLeft,
-          colors: [
-            Color(0xFFDB84B1),
-            Color(0xFF3A3E88),
-          ],
-        ),
-      ),
+      decoration:
+          const BoxDecoration(color: Color.fromARGB(255, 236, 220, 226)),
       child: Theme(
         data: Theme.of(context).copyWith(
           colorScheme: ColorScheme.fromSwatch()
@@ -28,37 +21,118 @@ class _PatientHomeState extends State<PatientHome> {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            extendBodyBehindAppBar: true,
-            appBar: _buildAppBar(context),
-            body: EventTimeline(),
+            extendBodyBehindAppBar: false,
+            appBar: _buildAppBar(context, 'SomeBody'),
+            body: ListView(
+                padding: const EdgeInsets.only(top: 0),
+                children: <Widget>[
+                  const FetusInfo(dayCount: 156, name: 'SomeBody'),
+                  EventTimeline(),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  DietSection()
+                ]),
           ),
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar(context) {
+  PreferredSizeWidget _buildAppBar(context, String name) {
     return AppBar(
+      title: Row(children: [
+        Text(
+          'Hello, ',
+          style: TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.5)),
+        ),
+        Text(
+          name,
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.black.withOpacity(0.8)),
+        ),
+      ]),
       elevation: 0,
       backgroundColor: Colors.transparent,
-      title: const Text(
-        'Good day',
-        style: TextStyle(
-          color: Color(0xFF9E3773),
-          fontWeight: FontWeight.bold,
-        ),
-      ),
       actions: <Widget>[
         IconButton(
-          icon: const Icon(
-            Icons.search,
-            color: Color(0xFF9E3773),
-          ),
           onPressed: () {
             showSearch(context: context, delegate: DataSearch());
           },
+          icon: const Icon(
+            Icons.search,
+            color: Color.fromARGB(255, 182, 3, 107),
+          ),
         )
       ],
+    );
+  }
+}
+
+class FetusInfo extends StatelessWidget {
+  final int dayCount;
+  final String name;
+
+  const FetusInfo({required this.dayCount, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    final int weekCount = dayCount ~/ 7 + 1;
+    final String imagePath = 'assets/fetus/week ($weekCount).jpg';
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      height: MediaQuery.of(context).size.height * 0.6,
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          image: DecorationImage(
+              image: AssetImage(imagePath), fit: BoxFit.fitHeight)),
+      child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Day',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        Text(
+                          '$dayCount',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 35),
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Week',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        Text(
+                          '$weekCount',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              ])),
     );
   }
 }
