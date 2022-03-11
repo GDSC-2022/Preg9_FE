@@ -30,15 +30,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: const Color.fromARGB(255, 236, 220, 226),
           onTap: onTap,
           currentIndex: currentIndex,
           selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey.withOpacity(0.5),
+          unselectedItemColor: Colors.black.withOpacity(0.5),
           elevation: 0,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: [
-            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.apps)),
+          items: const [
+            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
             BottomNavigationBarItem(
                 label: 'My Doctors', icon: Icon(Icons.medical_services)),
             BottomNavigationBarItem(
