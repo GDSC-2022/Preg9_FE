@@ -44,9 +44,9 @@ class _PatientHomeState extends State<PatientHome> {
           onPressed: () {
             showSearch(context: context, delegate: DataSearch());
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.search,
-            color: Color.fromARGB(255, 182, 3, 107),
+            color: Colors.pink[700],
           ),
         )
       ],
