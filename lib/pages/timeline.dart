@@ -19,7 +19,7 @@ class EventTimeline extends StatelessWidget {
             ),
             _buildTimelineTile(
                 indicator: const _IconIndicator(
-                  iconData: Icons.medical_services,
+                  iconData: Icons.medical_services_outlined,
                   size: 20,
                 ),
                 date: 'March 3',
@@ -29,7 +29,7 @@ class EventTimeline extends StatelessWidget {
                 isFirst: true),
             _buildTimelineTile(
                 indicator: const _IconIndicator(
-                  iconData: Icons.medical_services,
+                  iconData: Icons.medical_services_outlined,
                   size: 20,
                 ),
                 date: 'March 5',
@@ -54,7 +54,7 @@ TimelineTile _buildTimelineTile({
   return TimelineTile(
     alignment: TimelineAlign.manual,
     lineXY: 0.3,
-    beforeLineStyle: const LineStyle(color: Color.fromARGB(255, 182, 3, 107)),
+    beforeLineStyle: LineStyle(color: Color(0XFFC2185B)),
     indicatorStyle: IndicatorStyle(
       indicatorXY: 0.3,
       drawGap: true,
@@ -128,9 +128,9 @@ class _IconIndicator extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Color.fromARGB(255, 182, 3, 107),
+            color: Colors.pink[700],
           ),
         ),
         Positioned.fill(
@@ -140,7 +140,7 @@ class _IconIndicator extends StatelessWidget {
               height: 30,
               width: 30,
               child: Icon(iconData,
-                  size: size, color: const Color.fromARGB(255, 236, 220, 226)),
+                  size: size, color: Colors.pink[50]),
             ),
           ),
         ),
