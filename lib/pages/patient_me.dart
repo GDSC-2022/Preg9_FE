@@ -9,42 +9,40 @@ class _PatientMePageState extends State<PatientMePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      backgroundColor: Colors.pink[50],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Column(
         children: [
-          // Stack(
-          //   fit: StackFit.expand,
-          //   clipBehavior: Clip.none,
-          //   children: [
-          //     CircleAvatar(
-          //       backgroundImage: AssetImage("assets/avatar.jpg"),
-          //       radius: 50,
-          //     ),
-          //     Positioned(
-          //       right: -16,
-          //       bottom: 0,
-          //       child: SizedBox(
-          //         height: 46,
-          //         width: 46,
-          //         child: TextButton(
-          //           style: TextButton.styleFrom(
-          //             shape:
-          //                 CircleBorder(side: BorderSide(color: Colors.white)),
-          //             primary: Colors.white,
-          //             backgroundColor: Color(0xFFF5F6F9),
-          //           ),
-          //           onPressed: () {},
-          //           child: Icon(Icons.camera_alt),
-          //         ),
-          //       ),
-          //     )
-          //   ],
-          // ),
-          const SizedBox(
-            height: 20,
+          Stack(
+            fit: StackFit.passthrough,
+            clipBehavior: Clip.none,
+            children: [
+              CircleAvatar(backgroundImage: AssetImage('assets/avatar.jpg'), backgroundColor: Colors.transparent, radius: 60),
+              Positioned(
+                right: -16,
+                bottom: 0,
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      shape: CircleBorder(side: BorderSide(color: Colors.white, width: 2)),
+                      backgroundColor: Colors.grey[300],
+                    ),
+                    onPressed: () {},
+                    child: Icon(Icons.camera_alt_outlined, color: Colors.black.withOpacity(0.8)),
+                  ),
+                ),
+              )
+            ],
           ),
-          Text('SomeBody',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          const SizedBox(
+            height: 35,
+          ),
+          Text('SomeBody', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -69,31 +67,41 @@ class _PatientMePageState extends State<PatientMePage> {
             height: 20,
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Card(
-                child: ListTile(
-                  title: const Text('Send Message'),
-                  onTap: () {},
-                ),
-              )),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
               child: Card(
                 child: ListTile(
                   tileColor: Colors.pink,
-                  hoverColor: Colors.pink.withOpacity(0.5),
-                  title: const Text(
-                    'Video Call',
+                  title: const Center(
+                      child: Text(
+                    'MESSAGE',
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
+                  )),
                   onTap: () {},
                 ),
               )),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
               child: Card(
                 child: ListTile(
-                  title: const Text('Check Medical Records'),
+                  tileColor: Colors.pink,
+                  title: const Center(
+                      child: Text(
+                    'VIDEO CALL',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  )),
+                  onTap: () {},
+                ),
+              )),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: Card(
+                child: ListTile(
+                  tileColor: Colors.pink,
+                  title: const Center(
+                      child: Text(
+                    'MEDICAL RECORD',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  )),
                   onTap: () {},
                 ),
               ))
