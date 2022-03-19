@@ -10,32 +10,18 @@ class PatientHome extends StatefulWidget {
 class _PatientHomeState extends State<PatientHome> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration:
-          const BoxDecoration(color: Color.fromARGB(255, 236, 220, 226)),
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: ColorScheme.fromSwatch()
-              .copyWith(secondary: const Color(0xFFDB84B1).withOpacity(0.2)),
+    return Scaffold(
+      backgroundColor: Colors.pink[50],
+      extendBodyBehindAppBar: false,
+      appBar: _buildAppBar(context, 'SomeBody'),
+      body: ListView(padding: const EdgeInsets.only(top: 0), children: <Widget>[
+        const FetusInfo(dayCount: 156, name: 'SomeBody'),
+        EventTimeline(),
+        const SizedBox(
+          height: 15,
         ),
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            extendBodyBehindAppBar: false,
-            appBar: _buildAppBar(context, 'SomeBody'),
-            body: ListView(
-                padding: const EdgeInsets.only(top: 0),
-                children: <Widget>[
-                  const FetusInfo(dayCount: 156, name: 'SomeBody'),
-                  EventTimeline(),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  DietSection()
-                ]),
-          ),
-        ),
-      ),
+        DietSection()
+      ]),
     );
   }
 
@@ -48,10 +34,7 @@ class _PatientHomeState extends State<PatientHome> {
         ),
         Text(
           name,
-          style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Colors.black.withOpacity(0.8)),
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.8)),
         ),
       ]),
       elevation: 0,
@@ -85,54 +68,42 @@ class FetusInfo extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       height: MediaQuery.of(context).size.height * 0.6,
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          image: DecorationImage(
-              image: AssetImage(imagePath), fit: BoxFit.fitHeight)),
+      decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(20)), image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.fitHeight)),
       child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Day',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                        Text(
-                          '$dayCount',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 35),
-                        )
-                      ],
+                    const Text(
+                      'Day',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Week',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                        Text(
-                          '$weekCount',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+                    Text(
+                      '$dayCount',
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35),
+                    )
                   ],
-                )
-              ])),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Week',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    Text(
+                      '$weekCount',
+                      style: const TextStyle(color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              ],
+            )
+          ])),
     );
   }
 }
@@ -175,8 +146,7 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     // show when someone searches for anything
-    final suggestionList =
-        doctorsList.where((p) => p.startsWith(query)).toList();
+    final suggestionList = doctorsList.where((p) => p.startsWith(query)).toList();
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
@@ -185,15 +155,9 @@ class DataSearch extends SearchDelegate<String> {
         },
         leading: const Icon(Icons.medical_services),
         title: RichText(
-            text: TextSpan(
-                text: suggestionList[index].substring(0, query.length),
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-                children: [
-              TextSpan(
-                  text: suggestionList[index].substring(query.length),
-                  style: const TextStyle(color: Colors.grey))
-            ])),
+            text: TextSpan(text: suggestionList[index].substring(0, query.length), style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold), children: [
+          TextSpan(text: suggestionList[index].substring(query.length), style: const TextStyle(color: Colors.grey))
+        ])),
       ),
       itemCount: suggestionList.length,
     );
